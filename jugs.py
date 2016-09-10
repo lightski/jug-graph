@@ -4,7 +4,7 @@
     accepts commandline input for jugs/capacities and targer
     use: python jugs.py 8 5 3 4
     where 8,5, and 3 are jugs and 4 is target volume
-    more info: readme.txt
+    more info: README.md
 '''
 
 import sys
@@ -34,7 +34,7 @@ def calc_parent(v, visited, outstr):
         outstr += str(v)
         return outstr
     else:
-        outstr = outstr + str(v) + "<-" + str(calc_parent(visited[v][1], visited, outstr))
+        outstr = str(calc_parent(visited[v][1], visited, outstr)) + "->" + str(v) + outstr
         return outstr
 
 
@@ -71,10 +71,10 @@ if __name__ == "__main__":
         list(map(int, invals))
         capacity = [int(i) for i in invals]
         t = int(sys.argv[len(sys.argv) - 1])
-        print("Using jugs",capacity,"to reach",t,"liters")
+        print("Using jugs sized",capacity,"to get",t,"liters")
         res = BFS(capacity,t)
         if res:
-            print("Success! Here is the solution (follow arrows <-):\n",res)
+            print("Success! Here is the solution (follow arrows ->):\n",res)
         else:
             print("Sorry,",t,"could not be reached\nTry some other values")
 
